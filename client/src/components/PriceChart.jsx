@@ -150,7 +150,7 @@ function PriceChart({ symbol }) {
    * Zoom
    */
   const handleWheel = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
 
     if (!candles.length) return;
 

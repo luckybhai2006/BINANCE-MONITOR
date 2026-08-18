@@ -1,8 +1,9 @@
 /* Market summary */
 .market-header {
-  margin: 16px 22px 0;
+  margin: 12px 22px 0;
   display: grid;
   grid-template-columns: 2fr repeat(4, 1fr);
+  flex: 0 0 auto;
   overflow: hidden;
   background: #292f38;
   border: 1px solid grey;
@@ -11,8 +12,8 @@
 
 .symbol-block,
 .market-stat {
-  min-height: 116px;
-  padding: 20px 24px;
+  min-height: 82px;
+  padding: 12px 16px;
   background: #0b0f14;
   border-right: 1px solid #303945;
 }
@@ -22,7 +23,7 @@
 .symbol-line {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .symbol-dropdown {
@@ -30,7 +31,7 @@
   display: flex;
   align-items: center;
   width: 155px;
-  height: 42px;
+  height: 34px;
   background: #11151b;
   border: 1px solid #303640;
   border-radius: 7px;
@@ -53,12 +54,13 @@
   width: 100%;
   height: 100%;
   padding: 0 38px 0 13px;
+  padding: 0 34px 0 11px;
   border: none;
   outline: none;
   background: transparent;
   color: #eaecef;
   font-family: monospace;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -75,9 +77,10 @@
   position: absolute;
   top: 40%;
   right: 12px;
+  right: 10px;
   transform: translateY(-55%);
   color: #8b94a3;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1;
   pointer-events: none;
 }
@@ -89,24 +92,24 @@
 .symbol-line h2 {
   margin: 0;
   color: #f0f2f4;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 750;
 }
 
 .spot-badge {
-  padding: 4px 7px;
+  padding: 3px 6px;
   border-radius: 4px;
   background: #202630;
   color: #9ba4b1;
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
 }
 
 .exchange {
   display: block;
-  margin-top: 6px;
+  margin-top: 3px;
   color: #65707d;
-  font-size: 15px;
+  font-size: 11px;
   letter-spacing: 1px;
 }
 
@@ -118,23 +121,23 @@
 
 .market-stat span {
   color: #66717e;
-  font-size: 15px;
+  font-size: 11px;
   letter-spacing: 1.3px;
 }
 
 .market-stat strong {
-  margin-top: 7px;
+  margin-top: 4px;
   color: #e8ebee;
   font-family: monospace;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
 }
 
 .live-price {
-  margin-top: 7px;
+  margin-top: 4px;
   color: #0ecb81;
   font-family: monospace;
-  font-size: 26px;
+  font-size: 18px;
   font-weight: 800;
   transition: color 0.2s ease;
 }

@@ -9,6 +9,7 @@
   }
 
   .terminal {
+    height: auto;
     min-height: 100svh;
     overflow: visible;
   }
@@ -71,9 +72,11 @@
   }
 
   .dashboard {
+    flex: initial;
     margin: 12px 10px 0;
     padding: 0;
     gap: 12px;
+    overflow: visible;
   }
 
   .panel,
@@ -141,6 +144,7 @@
   .trade-list {
     height: min(55vh, 400px);
     min-height: 280px;
+    flex: initial;
   }
 
   .trade-head,

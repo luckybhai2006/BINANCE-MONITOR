@@ -3,7 +3,7 @@
 ========================================= */
 
 .chart-panel {
-  height: 604px;
+  min-height: 0;
 }
 
 .chart-header {
@@ -88,7 +88,9 @@
 /* CHART */
 
 .chart-wrapper {
-  height: 390px;
+  height: auto;
+  min-height: 0;
+  flex: 1 1 auto;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -96,7 +98,7 @@
 
 .price-chart {
   width: 100%;
-  height: 390px;
+  height: 100%;
   display: block;
 }
 
@@ -150,7 +152,7 @@
 /* LOADING */
 
 .chart-loading {
-  height: 390px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,16 +161,18 @@
 /* FOOTER */
 
 .chart-footer {
-  height: 9rem;
+  min-height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 14px;
+  padding: 14px;
   border-top: 1px solid #181c23;
   color: #4f5866;
   font-family: monospace;
-  font-size: 15px;
+  font-size: 12px;
   letter-spacing: 0.8px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .chart-live {
