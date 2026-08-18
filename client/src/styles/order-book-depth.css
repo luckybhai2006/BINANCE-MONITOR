@@ -10,7 +10,7 @@
   top: 1px;
   bottom: 1px;
   z-index: -1;
-  opacity: 0.25;
+  opacity: 0.4;
   pointer-events: none;
   transition: width 0.25s linear;
   will-change: width;
