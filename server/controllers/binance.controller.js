@@ -12,11 +12,15 @@ const getTickerData = async (req, res) => {
       data,
     });
   } catch (error) {
-    console.error("Binance ticker error:", error.message);
+    console.error("Binance ticker error:", error.response?.status);
+    console.error("Binance ticker response:", error.response?.data);
+    console.error("Binance ticker message:", error.message);
 
-    res.status(500).json({
+    res.status(error.response?.status || 500).json({
       success: false,
-      message: "Failed to fetch ticker",
+      message: error.message,
+      binanceStatus: error.response?.status,
+      binanceResponse: error.response?.data,
     });
   }
 };

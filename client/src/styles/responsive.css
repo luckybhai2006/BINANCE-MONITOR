@@ -3,6 +3,61 @@
    Kept at the end so these rules take priority over the desktop panel styles.
 ========================================= */
 
+@media (max-width: 1180px) {
+  .panel-header {
+    padding-inline: 14px;
+  }
+
+  .panel-header h3 {
+    font-size: 13px;
+  }
+
+  .panel-header span,
+  .book-status,
+  .trade-count {
+    font-size: 11px;
+  }
+
+  .book-grid {
+    grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr);
+  }
+
+  .book-title,
+  .columns,
+  .book-row {
+    padding-inline: 10px;
+  }
+
+  .book-row,
+  .columns {
+    font-size: 9px;
+  }
+
+  .spread strong {
+    font-size: 11px;
+  }
+
+  .trade-head,
+  .trade-row {
+    grid-template-columns: 0.9fr 1.05fr 1fr 0.72fr;
+    padding-inline: 12px;
+  }
+
+  .trade-head {
+    font-size: 9px;
+  }
+
+  .trade-row {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 960px) {
+  .rows {
+    max-height: 420px;
+  }
+}
+
 @media (max-width: 700px) {
   body {
     overflow-y: auto;
@@ -105,6 +160,7 @@
 
   .rows {
     min-height: 0;
+    max-height: none;
   }
 
   .book-title,

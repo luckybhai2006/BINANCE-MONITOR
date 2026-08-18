@@ -39,6 +39,7 @@
     0.7fr;
 
   align-items: center;
+  column-gap: 10px;
 }
 
 /* table header */
@@ -84,7 +85,7 @@
   min-height: 34px;
   padding: 0 16px;
 
-  border-bottom: 5px solid #252b34;
+  border-bottom: 1px solid #252b34;
 
   font-family: monospace;
   font-size: 11px;
@@ -111,4 +112,10 @@
 .side {
   font-size: 10px;
   font-weight: 700;
+}
+
+.trade-head span,
+.trade-row span {
+  min-width: 0;
+  white-space: nowrap;
 }

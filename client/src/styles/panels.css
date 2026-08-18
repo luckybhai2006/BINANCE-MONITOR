@@ -37,6 +37,10 @@
   border-bottom: 1px solid grey;
 }
 
+.panel-header > div:first-child {
+  min-width: 0;
+}
+
 .panel-header h3 {
   margin: 0;
 
@@ -50,24 +54,29 @@
   margin-top: 4px;
 
   color: #687381;
-  font-size: 15px;
+  font-size: 12px;
   letter-spacing: 1.1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .book-status {
   display: flex;
   align-items: center;
   gap: 7px;
+  flex: 0 0 auto;
 
   color: #788391;
-  font-size: 15px;
+  font-size: 12px;
   letter-spacing: 1px;
 }
 
 .trade-count {
   color: #788391;
-  font-size: 15px;
+  font-size: 12px;
   letter-spacing: 1px;
+  flex: 0 0 auto;
 }
 
 /* =========================
@@ -132,6 +141,7 @@
 
   font-family: monospace;
   font-size: 10px;
+  column-gap: 10px;
 
   border-top: 1px solid #292f38;
   border-bottom: 1px solid #292f38;
@@ -144,7 +154,8 @@
 .rows {
   min-height: 0;
   flex: 1 1 auto;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .book-row {
@@ -153,6 +164,7 @@
 
   display: grid;
   grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
   align-items: center;
 
   font-family: monospace;
@@ -165,6 +177,11 @@
 
 .book-row span:last-child {
   text-align: right;
+}
+
+.book-row span {
+  min-width: 0;
+  white-space: nowrap;
 }
 
 .ask-row {
@@ -221,4 +238,6 @@
 
   color: #5e6976;
   font-size: 8px;
+  text-align: center;
+  overflow-wrap: anywhere;
 }
