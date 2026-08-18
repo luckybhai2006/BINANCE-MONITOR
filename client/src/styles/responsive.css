@@ -1,0 +1,222 @@
+/* =========================================
+   MOBILE LAYOUT SAFEGUARDS
+   Kept at the end so these rules take priority over the desktop panel styles.
+========================================= */
+
+@media (max-width: 700px) {
+  body {
+    overflow-y: auto;
+  }
+
+  .terminal {
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  .topbar {
+    height: auto;
+    min-height: 64px;
+  }
+
+  .brand {
+    min-width: 0;
+    gap: 10px;
+  }
+
+  .brand-logo {
+    width: 34px;
+    height: 34px;
+    font-size: 20px;
+    flex: 0 0 auto;
+  }
+
+  .brand h1 {
+    font-size: 15px;
+  }
+
+  .brand span,
+  .connection {
+    font-size: 8px;
+    letter-spacing: 0.8px;
+  }
+
+  .market-header {
+    margin: 12px 10px 0;
+  }
+
+  .symbol-block,
+  .market-stat {
+    padding: 15px 16px;
+  }
+
+  .symbol-line {
+    flex-wrap: wrap;
+  }
+
+  .symbol-dropdown {
+    width: min(155px, 100%);
+  }
+
+  .market-stat span {
+    font-size: 11px;
+  }
+
+  .market-stat strong {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+
+  .live-price {
+    font-size: clamp(22px, 7vw, 26px);
+  }
+
+  .dashboard {
+    margin: 12px 10px 0;
+    padding: 0;
+    gap: 12px;
+  }
+
+  .panel,
+  .chart-panel {
+    height: auto;
+    min-height: 0;
+  }
+
+  .order-panel {
+    overflow: hidden;
+  }
+
+  /* Keep bid and ask prices side-by-side instead of making one very tall box. */
+  .book-grid {
+    grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .spread {
+    min-height: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 1px solid #303945;
+    border-right: 1px solid #303945;
+  }
+
+  .rows {
+    min-height: 0;
+  }
+
+  .book-title,
+  .columns,
+  .book-row {
+    padding-inline: 8px;
+  }
+
+  .book-row {
+    font-size: clamp(8px, 2.7vw, 10px);
+  }
+
+  .chart-header {
+    min-height: 0;
+  }
+
+  .chart-wrapper,
+  .price-chart,
+  .chart-loading {
+    height: clamp(260px, 72vw, 340px);
+  }
+
+  .chart-footer {
+    height: auto;
+    min-height: 46px;
+    padding: 10px;
+    font-size: 9px;
+    gap: 8px;
+  }
+
+  .chart-tooltip {
+    gap: 7px;
+    padding: 6px 8px;
+    font-size: 9px;
+  }
+
+  .trade-list {
+    height: min(55vh, 400px);
+    min-height: 280px;
+  }
+
+  .trade-head,
+  .trade-row {
+    grid-template-columns: 0.9fr 1.15fr 1.1fr 0.65fr;
+    padding-inline: 10px;
+  }
+
+  footer {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 390px) {
+  .topbar {
+    padding-inline: 12px;
+  }
+
+  .connection {
+    gap: 5px;
+  }
+
+  .book-grid {
+    grid-template-columns: minmax(0, 1fr) 52px minmax(0, 1fr);
+  }
+
+  .spread strong {
+    font-size: 10px;
+  }
+
+  .spread small {
+    max-width: 44px;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+
+  .chart-footer span:nth-child(2) {
+    display: none;
+  }
+
+  .trade-head,
+  .trade-row {
+    padding-inline: 8px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 450px) {
+  .panel-header {
+    padding: 0 13px;
+  }
+
+  .book-row {
+    padding: 0 11px;
+    font-size: 10px;
+  }
+
+  .columns {
+    padding: 0 11px;
+  }
+
+  .trade-head {
+    padding: 0 10px;
+    font-size: 8px;
+  }
+
+  .trade-row {
+    padding: 0 10px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 390px) {
+  .book-row,
+  .trade-row {
+    padding-inline: 8px;
+    font-size: 9px;
+  }
+}

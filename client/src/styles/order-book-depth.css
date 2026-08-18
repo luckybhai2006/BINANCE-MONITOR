@@ -1,0 +1,32 @@
+/* Order-book depth visualisation */
+.book-row {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.depth-bar {
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  z-index: -1;
+  opacity: 0.25;
+  pointer-events: none;
+  transition: width 0.25s linear;
+  will-change: width;
+}
+
+.ask-depth {
+  left: 0;
+  background: #f6465d;
+}
+
+.bid-depth {
+  right: 0;
+  background: #0ecb81;
+}
+
+.book-row > span {
+  position: relative;
+  z-index: 2;
+}

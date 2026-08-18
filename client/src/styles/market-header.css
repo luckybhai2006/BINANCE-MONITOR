@@ -1,0 +1,143 @@
+/* Market summary */
+.market-header {
+  margin: 16px 22px 0;
+  display: grid;
+  grid-template-columns: 2fr repeat(4, 1fr);
+  overflow: hidden;
+  background: #292f38;
+  border: 1px solid grey;
+  border-radius: 7px;
+}
+
+.symbol-block,
+.market-stat {
+  min-height: 116px;
+  padding: 20px 24px;
+  background: #0b0f14;
+  border-right: 1px solid #303945;
+}
+
+.market-stat:last-child { border-right: none; }
+
+.symbol-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.symbol-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 155px;
+  height: 42px;
+  background: #11151b;
+  border: 1px solid #303640;
+  border-radius: 7px;
+  transition: all 0.15s ease;
+}
+
+.symbol-dropdown:hover {
+  background: #151a21;
+  border-color: #596270;
+}
+
+.symbol-dropdown:focus-within {
+  border-color: #f7931a;
+  box-shadow: 0 0 0 2px rgba(247, 147, 26, 0.1);
+}
+
+.symbol-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 100%;
+  padding: 0 38px 0 13px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #eaecef;
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.symbol-select option {
+  background: #11151b;
+  color: #eaecef;
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  top: 40%;
+  right: 12px;
+  transform: translateY(-55%);
+  color: #8b94a3;
+  font-size: 18px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.symbol-select:hover {
+  background-color: #151a21;
+}
+
+.symbol-line h2 {
+  margin: 0;
+  color: #f0f2f4;
+  font-size: 23px;
+  font-weight: 750;
+}
+
+.spot-badge {
+  padding: 4px 7px;
+  border-radius: 4px;
+  background: #202630;
+  color: #9ba4b1;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.exchange {
+  display: block;
+  margin-top: 6px;
+  color: #65707d;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.market-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.market-stat span {
+  color: #66717e;
+  font-size: 15px;
+  letter-spacing: 1.3px;
+}
+
+.market-stat strong {
+  margin-top: 7px;
+  color: #e8ebee;
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.live-price {
+  margin-top: 7px;
+  color: #0ecb81;
+  font-family: monospace;
+  font-size: 26px;
+  font-weight: 800;
+  transition: color 0.2s ease;
+}
+
+.price-up, .positive { color: #0ecb81 !important; }
+.price-down, .negative { color: #f6465d !important; }

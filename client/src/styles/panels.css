@@ -1,0 +1,215 @@
+/* =========================
+   MAIN DASHBOARD
+========================= */
+
+/* =========================
+   PANEL
+========================= */
+
+.panel {
+  min-width: 0;
+  overflow: hidden;
+
+  background: #0b0f14;
+
+  border: 1.5px solid grey;
+  border-radius: 6px;
+  min-height: 0;
+  height: 604px;
+}
+
+/* =========================
+   PANEL HEADER
+========================= */
+
+.panel-header {
+  height: 66px;
+  padding: 0 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #0c1015;
+
+  border-bottom: 1px solid grey;
+}
+
+.panel-header h3 {
+  margin: 0;
+
+  color: #eef0f2;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.panel-header span {
+  display: block;
+  margin-top: 4px;
+
+  color: #687381;
+  font-size: 15px;
+  letter-spacing: 1.1px;
+}
+
+.book-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #788391;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.trade-count {
+  color: #788391;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+/* =========================
+   ORDER BOOK
+========================= */
+
+.book-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    92px
+    minmax(0, 1fr);
+
+  min-height: 500px;
+}
+
+.book-side {
+  min-width: 0;
+  background: #0b0f14;
+}
+
+.book-title {
+  height: 36px;
+  padding: 0 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+
+  border-bottom: 1px solid #29313b;
+}
+
+.ask-title {
+  color: #f6465d;
+  background: rgba(246, 70, 93, 0.025);
+}
+
+.bid-title {
+  color: #0ecb81;
+  background: rgba(14, 203, 129, 0.025);
+}
+
+.columns {
+  height: 29px;
+  padding: 0 14px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+  color: darkgrey;
+
+  font-family: monospace;
+  font-size: 10px;
+
+  border-top: 1px solid #292f38;
+  border-bottom: 1px solid #292f38;
+}
+
+.columns span:last-child {
+  text-align: right;
+}
+
+.rows {
+  min-height: 430px;
+}
+
+.book-row {
+  height: 26px;
+  padding: 0 14px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+  font-family: monospace;
+  font-size: 11px;
+
+  border-bottom: 1px solid #1d242d;
+
+  transition: background 0.15s ease;
+}
+
+.book-row span:last-child {
+  text-align: right;
+}
+
+.ask-row {
+  color: #f6465d;
+}
+
+.bid-row {
+  color: #0ecb81;
+}
+
+.ask-row:hover {
+  background: rgba(246, 70, 93, 0.07);
+}
+
+.bid-row:hover {
+  background: rgba(14, 203, 129, 0.07);
+}
+
+/* =========================
+   SPREAD
+========================= */
+
+.spread {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: #090d12;
+
+  border-left: 1px solid #303945;
+  border-right: 1px solid #303945;
+
+  color: #66717e;
+}
+
+.spread span {
+  font-size: 8px;
+  letter-spacing: 1.2px;
+}
+
+.spread strong {
+  margin-top: 7px;
+
+  color: #f1f3f5;
+
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.spread small {
+  margin-top: 4px;
+
+  color: #5e6976;
+  font-size: 8px;
+}

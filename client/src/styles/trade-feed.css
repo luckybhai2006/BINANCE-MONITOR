@@ -1,0 +1,113 @@
+.trade-list::-webkit-scrollbar { width: 7px; }
+.trade-list::-webkit-scrollbar-track { background: #090d12; }
+.trade-list::-webkit-scrollbar-thumb {
+  background: #303945;
+  border-radius: 6px;
+}
+.trade-list::-webkit-scrollbar-thumb:hover { background: #46515e; }
+
+.error {
+  margin: 12px;
+  padding: 10px;
+  border: 1px solid rgba(246, 70, 93, 0.3);
+  border-radius: 4px;
+  background: rgba(246, 70, 93, 0.08);
+  color: #f6465d;
+  font-size: 12px;
+}
+/* =========================
+   TRADE FEED
+========================= */
+
+.trade-panel {
+  display: flex;
+  flex-direction: column;
+
+  /* COMPLETE BOX */
+  border: 1px solid grey;
+  border-radius: 7px;
+}
+
+.trade-head,
+.trade-row {
+  display: grid;
+  grid-template-columns:
+    1fr
+    1.2fr
+    1fr
+    0.7fr;
+
+  align-items: center;
+}
+
+/* table header */
+
+.trade-head {
+  min-height: 36px;
+  padding: 0 16px;
+
+  background: #0a0e13;
+
+  color: darkgrey;
+
+  font-size: 10px;
+  letter-spacing: 1px;
+
+  border-bottom: 1px solid #303945;
+}
+
+/* trade list */
+
+.trade-list {
+  height: 500px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background: #0b0f14;
+}
+
+.trade-loading {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #626b79;
+  font-size: 11px;
+  font-family: monospace;
+}
+/* EACH TRADE = VISIBLE ROW BOX */
+
+.trade-row {
+  min-height: 34px;
+  padding: 0 16px;
+
+  border-bottom: 5px solid #252b34;
+
+  font-family: monospace;
+  font-size: 11px;
+
+  transition: background 0.15s ease;
+}
+
+.trade-row:hover {
+  background: #141a21;
+}
+
+.trade-time {
+  color: #737e8a;
+}
+
+.buy {
+  color: #0ecb81;
+}
+
+.sell {
+  color: #f6465d;
+}
+
+.side {
+  font-size: 10px;
+  font-weight: 700;
+}

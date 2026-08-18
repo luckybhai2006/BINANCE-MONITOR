@@ -1,0 +1,61 @@
+/* symbol selector */
+/* SYMBOL SELECTOR */
+
+.symbol-selector {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.symbol-btn {
+  border: 1px solid #2a3039;
+  background: #11151b;
+  color: #8b94a3;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: monospace;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.symbol-btn:hover {
+  border-color: #4b5563;
+  color: #eaecef;
+}
+
+.symbol-btn.active {
+  background: #1d222b;
+  border-color: #0ecb81;
+  color: #0ecb81;
+}
+
+.ticker-loading {
+  margin-top: 8px;
+  color: #626b79;
+  font-size: 10px;
+}
+
+.symbol-select {
+  appearance: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #eaecef;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 800;
+  cursor: pointer;
+  /* padding: 0; */
+}
+
+.symbol-select option {
+  background: #0d1015;
+  color: #eaecef;
+}
+
+.symbol-select:focus {
+  outline: none;
+}

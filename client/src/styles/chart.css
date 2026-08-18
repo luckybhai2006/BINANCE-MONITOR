@@ -1,0 +1,184 @@
+/* =========================================
+   CENTER PRICE CHART
+========================================= */
+
+.chart-panel {
+  height: 604px;
+}
+
+.chart-header {
+  min-height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 18px;
+  border-bottom: 1px solid #20242c;
+}
+
+.chart-header h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.chart-header span {
+  display: block;
+  margin-top: 4px;
+  color: #626b79;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.chart-tools {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chart-tools button {
+  border: 1px solid transparent;
+  background: transparent;
+  color: #626b79;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.chart-tools button:hover {
+  color: #eaecef;
+  background: #161a21;
+}
+
+.chart-tools button.active {
+  color: #eaecef;
+  background: #1d222b;
+  border-color: #303641;
+}
+
+/* OHLC */
+
+.ohlc {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px;
+  border-bottom: 1px solid #181c23;
+  color: #626b79;
+  font-family: monospace;
+  font-size: 9px;
+}
+
+.ohlc strong {
+  color: #aeb5c0;
+  font-weight: 500;
+}
+
+.chart-buy {
+  color: #0ecb81 !important;
+}
+
+.chart-sell {
+  color: #f6465d !important;
+}
+
+/* CHART */
+
+.chart-wrapper {
+  height: 390px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.price-chart {
+  width: 100%;
+  height: 390px;
+  display: block;
+}
+
+.chart-grid-line {
+  stroke: #1a1e25;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.candle-wick-up,
+.candle-wick-down {
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.candle-wick-up {
+  stroke: #0ecb81;
+}
+
+.candle-wick-down {
+  stroke: #f6465d;
+}
+
+.candle-up {
+  fill: #0ecb81;
+}
+
+.candle-down {
+  fill: #f6465d;
+}
+
+.current-price-line {
+  stroke: #596270;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.current-price-label {
+  fill: #eaecef;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.chart-price-label {
+  fill: #596270;
+  font-family: monospace;
+  font-size: 10px;
+}
+
+/* LOADING */
+
+.chart-loading {
+  height: 390px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FOOTER */
+
+.chart-footer {
+  height: 9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  border-top: 1px solid #181c23;
+  color: #4f5866;
+  font-family: monospace;
+  font-size: 15px;
+  letter-spacing: 0.8px;
+}
+
+.chart-live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #0ecb81;
+}
+
+.chart-live .live-dot {
+  width: 5px;
+  height: 5px;
+}

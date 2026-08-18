@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body {
+  background: #080b0f;
+  color: #eaecef;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-y: hidden;
+}
+
+/* =========================
+   TERMINAL
+========================= */
+
+.terminal {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+
+  background: radial-gradient(
+      circle at 50% -20%,
+      rgba(35, 43, 55, 0.22),
+      transparent 45%
+    ),
+    #080b0f;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar {
+  height: 76px;
+  padding: 0 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #0b0f14;
+  border-bottom: 1px solid white;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+  background: #f7931a;
+
+  color: #fff;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.brand h1 {
+  margin: 0;
+  color: #f1f3f5;
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.brand span {
+  display: block;
+  margin-top: 3px;
+
+  color: #697482;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+.connection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #0ecb81;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+  background: #0ecb81;
+
+  box-shadow: 0 0 9px rgba(14, 203, 129, 0.7);
+}
