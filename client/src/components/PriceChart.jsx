@@ -10,21 +10,31 @@ function PriceChart({ symbol }) {
   const [panOffset, setPanOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
+  const chartWrapperRef = useRef(null);
   const dragStartRef = useRef(null);
+
+  // Mobile pinch state
+  const pointersRef = useRef(new Map());
+  const pinchDistanceRef = useRef(null);
+  const pinchCountRef = useRef(40);
 
   const candles = useKlineChart(symbol, interval);
 
   /*
-   * Reset chart position whenever symbol
-   * or interval changes.
+   * Reset chart whenever symbol / interval changes
    */
   useEffect(() => {
     setVisibleCount(40);
     setPanOffset(0);
     setHoveredCandle(null);
     setMousePosition(null);
+
+    pinchCountRef.current = 40;
   }, [symbol, interval]);
 
+  /*
+   * CHART DATA
+   */
   const chartData = useMemo(() => {
     if (!candles.length) return null;
 
@@ -71,9 +81,11 @@ function PriceChart({ symbol }) {
   };
 
   const chartWidth = width - padding.left - padding.right;
-
   const chartHeight = height - padding.top - padding.bottom;
 
+  /*
+   * Y POSITION
+   */
   const getY = (price) => {
     if (!chartData) return height / 2;
 
@@ -82,6 +94,9 @@ function PriceChart({ symbol }) {
     return padding.top + ((chartData.maxPrice - price) / range) * chartHeight;
   };
 
+  /*
+   * X POSITION
+   */
   const getX = (index) => {
     if (!chartData) return 0;
 
@@ -97,7 +112,9 @@ function PriceChart({ symbol }) {
   const lastCandle = chartData?.candles[chartData.candles.length - 1];
 
   /*
-   * Mouse move
+   * ==========================================
+   * MOUSE MOVE
+   * ==========================================
    */
   const handleMouseMove = (event) => {
     if (!chartData || isDragging) return;
@@ -137,7 +154,9 @@ function PriceChart({ symbol }) {
   };
 
   /*
-   * Mouse leave
+   * ==========================================
+   * MOUSE LEAVE
+   * ==========================================
    */
   const handleMouseLeave = () => {
     if (!isDragging) {
@@ -147,43 +166,173 @@ function PriceChart({ symbol }) {
   };
 
   /*
-   * Zoom
+   * ==========================================
+   * DESKTOP WHEEL ZOOM
+   *
+   * Native passive:false listener is added
+   * below so preventDefault actually works.
+   * ==========================================
    */
-  const handleWheel = (event) => {
-    // event.preventDefault();
+  useEffect(() => {
+    const element = chartWrapperRef.current;
 
-    if (!candles.length) return;
+    if (!element) return;
 
-    setVisibleCount((current) => {
-      if (event.deltaY < 0) {
-        return Math.max(12, current - 4);
-      }
+    const handleWheelZoom = (event) => {
+      if (!candles.length) return;
 
-      return Math.min(candles.length, current + 4);
+      // Stop page scrolling while cursor is over chart
+      event.preventDefault();
+
+      setVisibleCount((current) => {
+        if (event.deltaY < 0) {
+          // Zoom IN
+          return Math.max(10, current - 2);
+        }
+
+        // Zoom OUT
+        return Math.min(candles.length, current + 2);
+      });
+    };
+
+    element.addEventListener("wheel", handleWheelZoom, {
+      passive: false,
     });
+
+    return () => {
+      element.removeEventListener("wheel", handleWheelZoom);
+    };
+  }, [candles.length]);
+
+  /*
+   * ==========================================
+   * DISTANCE BETWEEN TWO FINGERS
+   * ==========================================
+   */
+  const getPinchDistance = () => {
+    const points = Array.from(pointersRef.current.values());
+
+    if (points.length < 2) return null;
+
+    const first = points[0];
+    const second = points[1];
+
+    const dx = first.x - second.x;
+    const dy = first.y - second.y;
+
+    return Math.sqrt(dx * dx + dy * dy);
   };
 
   /*
-   * Start dragging
+   * ==========================================
+   * POINTER DOWN
+   * ==========================================
    */
   const handlePointerDown = (event) => {
     if (!chartData) return;
 
-    setIsDragging(true);
-
-    dragStartRef.current = {
+    /*
+     * Store touch/mouse pointer
+     */
+    pointersRef.current.set(event.pointerId, {
       x: event.clientX,
-      pan: panOffset,
-    };
+      y: event.clientY,
+      type: event.pointerType,
+    });
 
-    event.currentTarget.setPointerCapture(event.pointerId);
+    /*
+     * TWO FINGER PINCH START
+     */
+    if (pointersRef.current.size === 2) {
+      setIsDragging(false);
+      dragStartRef.current = null;
+
+      const distance = getPinchDistance();
+
+      if (distance) {
+        pinchDistanceRef.current = distance;
+        pinchCountRef.current = visibleCount;
+      }
+
+      return;
+    }
+
+    /*
+     * Normal mouse / one finger drag
+     */
+    if (pointersRef.current.size === 1) {
+      setIsDragging(true);
+
+      dragStartRef.current = {
+        x: event.clientX,
+        pan: panOffset,
+      };
+    }
+
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {}
   };
 
   /*
-   * Drag chart
+   * ==========================================
+   * POINTER MOVE
+   * ==========================================
    */
   const handlePointerMove = (event) => {
-    if (!isDragging || !dragStartRef.current || !chartData) {
+    if (!chartData) return;
+
+    /*
+     * Update pointer position
+     */
+    if (pointersRef.current.has(event.pointerId)) {
+      pointersRef.current.set(event.pointerId, {
+        x: event.clientX,
+        y: event.clientY,
+        type: event.pointerType,
+      });
+    }
+
+    /*
+     * ======================================
+     * TWO FINGER PINCH
+     * ======================================
+     */
+    if (pointersRef.current.size >= 2) {
+      const distance = getPinchDistance();
+
+      if (distance && pinchDistanceRef.current) {
+        const difference = distance - pinchDistanceRef.current;
+
+        /*
+         * Sensitivity
+         *
+         * Positive difference:
+         * fingers moving apart
+         * => zoom IN
+         *
+         * Negative difference:
+         * fingers moving together
+         * => zoom OUT
+         */
+        const zoomAmount = Math.round(difference / 20);
+
+        let nextCount = pinchCountRef.current - zoomAmount;
+
+        nextCount = Math.max(10, Math.min(candles.length, nextCount));
+
+        setVisibleCount(nextCount);
+      }
+
+      return;
+    }
+
+    /*
+     * ======================================
+     * NORMAL DRAG
+     * ======================================
+     */
+    if (!isDragging || !dragStartRef.current) {
       return;
     }
 
@@ -205,15 +354,48 @@ function PriceChart({ symbol }) {
   };
 
   /*
-   * Stop dragging
+   * ==========================================
+   * POINTER UP
+   * ==========================================
    */
   const handlePointerUp = (event) => {
-    setIsDragging(false);
-    dragStartRef.current = null;
+    pointersRef.current.delete(event.pointerId);
+
+    /*
+     * Pinch finished
+     */
+    if (pointersRef.current.size < 2) {
+      pinchDistanceRef.current = null;
+      pinchCountRef.current = visibleCount;
+    }
+
+    /*
+     * No fingers/pointers left
+     */
+    if (pointersRef.current.size === 0) {
+      setIsDragging(false);
+      dragStartRef.current = null;
+    }
 
     try {
       event.currentTarget.releasePointerCapture(event.pointerId);
     } catch {}
+  };
+
+  /*
+   * ==========================================
+   * POINTER CANCEL
+   * ==========================================
+   */
+  const handlePointerCancel = (event) => {
+    pointersRef.current.delete(event.pointerId);
+
+    pinchDistanceRef.current = null;
+
+    if (pointersRef.current.size === 0) {
+      setIsDragging(false);
+      dragStartRef.current = null;
+    }
   };
 
   return (
@@ -222,7 +404,6 @@ function PriceChart({ symbol }) {
       <div className="chart-header">
         <div>
           <h3>Price Chart</h3>
-
           <span>{symbol} · LIVE CANDLES</span>
         </div>
 
@@ -276,7 +457,14 @@ function PriceChart({ symbol }) {
       </div>
 
       {/* CHART */}
-      <div className="chart-wrapper" onWheel={handleWheel}>
+      <div
+        ref={chartWrapperRef}
+        className="chart-wrapper"
+        style={{
+          touchAction: "none",
+          overscrollBehavior: "contain",
+        }}
+      >
         {chartData ? (
           <svg
             className="price-chart"
@@ -287,12 +475,14 @@ function PriceChart({ symbol }) {
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerCancel}
             style={{
               cursor: isDragging ? "grabbing" : "crosshair",
               touchAction: "none",
             }}
           >
             {/* GRID */}
+
             {[0, 1, 2, 3, 4].map((line) => {
               const y = padding.top + (line / 4) * chartHeight;
 
@@ -324,6 +514,7 @@ function PriceChart({ symbol }) {
             })}
 
             {/* CANDLES */}
+
             {chartData.candles.map((candle, index) => {
               const x = getX(index);
 
@@ -349,6 +540,7 @@ function PriceChart({ symbol }) {
               return (
                 <g key={candle.time}>
                   {/* WICK */}
+
                   <line
                     x1={x}
                     x2={x}
@@ -358,6 +550,7 @@ function PriceChart({ symbol }) {
                   />
 
                   {/* BODY */}
+
                   <rect
                     x={x - candleWidth / 2}
                     y={bodyTop}
@@ -370,6 +563,7 @@ function PriceChart({ symbol }) {
             })}
 
             {/* CURRENT PRICE */}
+
             {lastCandle && (
               <>
                 <line
@@ -391,6 +585,7 @@ function PriceChart({ symbol }) {
             )}
 
             {/* PRICE LABELS */}
+
             {[0, 1, 2, 3, 4].map((line) => {
               const price =
                 chartData.maxPrice -
@@ -411,6 +606,7 @@ function PriceChart({ symbol }) {
             })}
 
             {/* CROSSHAIR */}
+
             {mousePosition && (
               <>
                 <line
@@ -429,7 +625,6 @@ function PriceChart({ symbol }) {
                   className="chart-crosshair"
                 />
 
-                {/* CROSSHAIR PRICE */}
                 <rect
                   x={width - padding.right}
                   y={mousePosition.y - 10}
@@ -461,6 +656,7 @@ function PriceChart({ symbol }) {
         )}
 
         {/* HOVER TOOLTIP */}
+
         {hoveredCandle && mousePosition && (
           <div
             className="chart-tooltip"
@@ -504,6 +700,7 @@ function PriceChart({ symbol }) {
       </div>
 
       {/* CHART FOOTER */}
+
       <div className="chart-footer">
         <span>{interval} CANDLES</span>
 
@@ -517,5 +714,4 @@ function PriceChart({ symbol }) {
     </section>
   );
 }
-
 export default PriceChart;
