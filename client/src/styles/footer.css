@@ -3,10 +3,10 @@
 ========================= */
 
 footer {
-  margin: 16px 22px 0;
+  margin: 12px clamp(10px, 1.5vw, 22px) 0;
 
   min-height: 54px;
-  padding: 0 20px;
+  padding: 0 clamp(14px, 1.35vw, 20px);
   flex: 0 0 auto;
 
   display: flex;
@@ -29,12 +29,7 @@ footer {
    RESPONSIVE
 ========================= */
 
-@media (max-width: 1100px) {
-  .dashboard {
-    grid-template-columns: 1fr;
-    overflow: visible;
-  }
-
+@media (max-width: 1160px) {
   .trade-list {
     height: 430px;
   }
@@ -67,21 +62,6 @@ footer {
   footer {
     margin-left: 14px;
     margin-right: 14px;
-  }
-}
-
-@media (max-width: 1100px) {
-  .market-header {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .symbol-block {
-    grid-column: 1 / -1;
-  }
-
-  .symbol-block,
-  .market-stat {
-    min-height: 82px;
   }
 }
 

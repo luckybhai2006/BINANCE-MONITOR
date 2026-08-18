@@ -2,7 +2,7 @@ const axios = require("axios");
 require("dotenv").config();
 
 const BINANCE_API = process.env.BINANCE_API;
-
+// console.log("BINANCE_API", BINANCE_API);
 const getTicker = async (symbol = "BTCUSDT") => {
   const response = await axios.get(`${BINANCE_API}/api/v3/ticker/24hr`, {
     params: {
