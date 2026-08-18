@@ -1,5 +1,8 @@
 const { getTicker, getDepth } = require("../services/binance.service");
 const axios = require("axios");
+require("dotenv").config();
+
+const BINANCE_API = process.env.BINANCE_API;
 
 const getTickerData = async (req, res) => {
   try {
@@ -49,7 +52,7 @@ const getTradesData = async (req, res) => {
   try {
     const { symbol = "BTCUSDT", limit = 50 } = req.query;
 
-    const response = await axios.get("https://api.binance.com/api/v3/trades", {
+    const response = await axios.get(`${BINANCE_API}/api/v3/trades`, {
       params: {
         symbol,
         limit,
